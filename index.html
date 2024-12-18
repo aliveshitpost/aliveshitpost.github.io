@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PONGLUED</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("./asset/bkg.gif");
+            color: rgb(75, 70, 70);
+            text-align: center;
+            overflow: hidden;
+            cursor: url('./asset/super_spy_gun.gif'), auto; /* Custom mouse pointer */
+
+        }
+
+        h1 {
+            font-size: 6rem;
+            margin-top: 5vh;
+            text-transform: uppercase;
+            animation: flashing 0.5s infinite;
+        }
+        h2 {
+            font-size: 3rem;
+            margin-top: 2vh;
+            text-transform: uppercase;
+            animation: flashing1 0.5s infinite;
+        }
+
+        @keyframes flashing {
+            0%, 100% { color: red; }
+            50% { color: yellow; }
+        }
+        @keyframes flashing1 {
+            0%, 100% { color: blue; }
+            50% { color: purple; }
+        }
+
+
+        .gif-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .gif-container img {
+            position: absolute;
+            width: auto;
+            height: auto;
+        }
+
+        .counter {
+            margin-top: 20px;
+            font-size: 1.5rem;
+        }
+        .gif-banner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            overflow: hidden;
+        }
+        .fillContainer {
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="music" src="./asset/music.mp3" preload="auto" loop></audio>
+    <audio id="clickSound" src="./asset/awp.mp3" preload="auto"></audio>
+    <div class="gif-banner">
+        <img src="./asset/DollarBanner.gif" alt="Top Banner GIF 1">
+        <img src="./asset/banner1cigarette.gif" alt="Top Banner GIF 2">
+        <img src="./asset/ad-005.gif" alt="Top Banner GIF 3">
+        <img src="./asset/counter.gif" alt="Top Banner GIF 4">
+        <img src="./asset/dollar_redTC.gif" alt="Top Banner GIF 5">
+
+    </div>
+    
+    <h1>You&apos;ve been PONGLUED!</h1>
+    <h2><span id="visitCount">0</span></div>th person ponglued today</h2>
+
+    <div class="gif-container">
+        <img id="gif1" src="./asset/dance2.gif" alt="Funny GIF">
+        <img id="gif2" src="./asset/dance1.gif" alt="Funny GIF">
+        <img id="gif3" src="./asset/dance2.gif" alt="Funny GIF">
+        <img id="gif4" src="./asset/dance3.gif" alt="Funny GIF">
+        <img id="gif5" src="./asset/dance4.gif" alt="Funny GIF">
+        <img id="gif6" src="./asset/dance5.gif" alt="Funny GIF">
+
+    </div>
+    <script>
+        
+        // Visit counter logic
+        const visitCountElement = document.getElementById('visitCount');
+
+        // Get visit count from localStorage or initialize it
+        let visitCount = localStorage.getItem('visitCount');
+        if (!visitCount) {
+            visitCount = 0;
+        } else {
+            visitCount = parseInt(visitCount, 10);
+        }
+
+        // Increment and save the new count
+        visitCount++;
+        localStorage.setItem('visitCount', visitCount);
+
+        // Display the visit count
+        visitCountElement.textContent = visitCount;
+
+        // Random movement logic
+        const gifs = document.querySelectorAll('.gif-container img');
+
+        function randomizeMovement(gif) {
+            const containerWidth = window.innerWidth * 0.8;
+            const containerHeight = window.innerHeight /2;
+            let x = Math.random() * (containerWidth - 150);
+            let y = Math.random() * (containerHeight - 150);
+            let dx = (Math.random() - 0.5) * 4; // Random direction and speed
+            let dy = (Math.random() - 0.5) * 4;
+
+            function move() {
+                x += dx;
+                y += dy;
+
+                if (x <= 0 || x >= containerWidth - 150) dx = -dx;
+                if (y <= 0 || y >= containerHeight - 150) dy = -dy;
+
+                gif.style.left = `${x}px`;
+                gif.style.top = `${y}px`;
+
+                requestAnimationFrame(move);
+            }
+
+            gif.style.position = "absolute";
+            move();
+        }
+
+        gifs.forEach(gif => randomizeMovement(gif));
+
+        window.addEventListener('resize', () => {
+            gifs.forEach(gif => randomizeMovement(gif));
+        });
+        var played = false;
+        document.body.addEventListener('click', () => {
+            const clickSound = document.getElementById('clickSound');
+            const music = document.getElementById('music');
+
+            clickSound.play();
+            if (played == false){
+                music.play();
+                played = true;
+            }
+        });
+  // Reproducir audio
+    </script>
+    <div class="fillContainer"></div>
+    <div class="gif-banner">
+        <img src="./asset/jesus.gif" alt="Top Banner GIF 1">
+        <img src="./asset/gunner.gif" alt="Top Banner GIF 2">
+        <img src="./asset/irsgun.gif" alt="Top Banner GIF 3">
+        <img src="./asset/cbet-banner-2.gif" alt="Top Banner GIF 4">
+        <img src="./asset/banneranime.gif" alt="Top Banner GIF 5">
+
+    </div>
+</body>
+</html>
